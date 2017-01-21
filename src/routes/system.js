@@ -10,7 +10,7 @@
 
 import sysPingController from "../controllers/system/ping.js";
 import sysEchoController from "../controllers/system/echo.js";
-import sysPErrorController from "../controllers/system/error.js";
+import sysErrorController from "../controllers/system/error.js";
 
  let oRouter = new Router();
 
