@@ -8,6 +8,6 @@
 
  import { db } from "../core/mongodb";
 
- let oRestos = db.collection( "restos" );
-
- export default oRestos;
+export default function() {
+    return db.collection( "restos" );
+}
