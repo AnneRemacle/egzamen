@@ -41,7 +41,7 @@ gulp.task( "reset-db", function( fNext ){
         return fNext();
     }
     // Connect to the MongoDB
-    MongoClient.connect( "mongodb://127.0.0.1.27017/egzamen", function( oError, oDB ){
+    MongoClient.connect( "mongodb://127.0.0.1:27017/egzamen", function( oError, oDB ){
 
         if ( oError ) {
             gUtil.beep();
@@ -56,7 +56,7 @@ gulp.task( "reset-db", function( fNext ){
           // 3. parse & fill export.json
           var aRestos = require( __dirname + "/data/export.json" );
 
-          return oDB.collection( "restos" ).insertMany();
+          return oDB.collection( "restos" ).insertMany( aRestos );
       } )
       .then( function(){
           oDB.close();
