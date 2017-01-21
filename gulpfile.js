@@ -11,7 +11,11 @@
  var
      gulp = require( "gulp" ),
      gEslint = require( "gulp-eslint" ),
-     gBabel = require( "gulp-babel" );
+     gBabel = require( "gulp-babel" ),
+     gUtil = require( "gulp-util" ),
+     Mongo = require( "mongodb" ),
+     ObjectID = Mongo.ObjectID,
+     MongoClient = Mongo.MongoClient;
 
 // La tâche lint: pour que le linter soit actif et nous signale nos erreurs dans le code
 gulp.task( "lint", function() {
@@ -26,7 +30,44 @@ gulp.task( "build", function() {
     return gulp
         .src( "src/**/*.js" )
         .pipe( gBabel() )
-        .pipe( gulp.dest( "bin/views" ) );
+        .pipe( gulp.dest( "bin" ) );
+} );
+
+gulp.task( "reset-db", function( fNext ){
+     // 1. Check if INSIDE vagrant
+    if ( process.env.USER !== "vagrant" ) {
+        gUtil.beep();
+        gUtil.log( gUtil.color.pink( "This task must be runned from INSIDE the vagrant box!" ) );
+        return fNext();
+    }
+    // Connect to the MongoDB
+    MongoClient.connect( "mongodb://127.0.0.1.27017/egzamen", function( oError, oDB ){
+
+        if ( oError ) {
+            gUtil.beep();
+            return fNext( oError );
+        }
+
+    } );
+
+     // 2. drop database
+    oDB.dropDatabase()
+      .then( function(){
+          // 3. parse & fill export.json
+          var aExports = require( __dirname + "/data/export.json" );
+
+          return oDB.collection( "exports" ).insertMany();
+      } )
+      .then( function(){
+          oDB.close();
+          gUtil.log( gUtil.color.green( "Database has been reset Mouahaha!" ) );
+          fNext();
+      } )
+      .catch( function( oError ){
+         //If error => desconnect the DB
+         oDB.close();
+         fNext( oError );
+      } )
 } );
 
 // La tâche watch: pour que gulp "regarde" les fichiers listés dedans et suive les modifications
