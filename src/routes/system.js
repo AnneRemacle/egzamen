@@ -13,7 +13,7 @@
  let oRouter = new Router();
 
  oRouter.get( "/sys/ping", sysPingController );
- // oRouter.get( "/sys/echo" );
- // oRouter.get( "sys/error" );
+oRouter.get( "/sys/echo", sysEchoController );
+oRouter.get( "sys/error", sysErrorController );
 
  export default oRouter;
