@@ -54,13 +54,13 @@ gulp.task( "reset-db", function( fNext ){
     oDB.dropDatabase()
       .then( function(){
           // 3. parse & fill export.json
-          var aExports = require( __dirname + "/data/export.json" );
+          var aRestos = require( __dirname + "/data/export.json" );
 
-          return oDB.collection( "exports" ).insertMany();
+          return oDB.collection( "restos" ).insertMany();
       } )
       .then( function(){
           oDB.close();
-          gUtil.log( gUtil.color.green( "Database has been reset Mouahaha!" ) );
+          gUtil.log( gUtil.colors.green( "Database has been reset Mouahaha!" ) );
           fNext();
       } )
       .catch( function( oError ){
