@@ -7,11 +7,11 @@
  */
 
  import getRestos from "../../models/restos";
- import { send, errors } from "../../core/utils/api";
+ import { send, error } from "../../core/utils/api";
  import { ObjectID } from "mongodb";
 
  export default function( oRequest, oResponse ) {
-
+     console.log(oRequest.params);
     let sRestoID = ( oRequest.params.id || "" ).trim(),
         oCurrentPosition;
 
@@ -24,7 +24,7 @@
             "_id": new ObjectID( sRestoID ),
             "deleted_at": null,
         } )
-        .then( ( { _id, name, latitude, longiture, address, hours } ) => {
+        .then( ( { _id, name, latitude, longitude, address, hours } ) => {
             let oCleanResto;
 
             if ( !_id ) {

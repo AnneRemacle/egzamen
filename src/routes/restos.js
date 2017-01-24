@@ -16,7 +16,7 @@ import detailsRestosController from "../controllers/restos/details";
 let oRouter = new Router();
 
 oRouter.get( "/restos", listRestosController );
-oRouter.get( "/restos/:slug", detailsRestosController );
+oRouter.get( "/restos/:id", detailsRestosController );
 // oRouter.post( "/restos", createRestosController );
 // oRouter.patch( "/restos", updateRestosController );
 // oRouter.delete( "/restos", destroyRestosController );
