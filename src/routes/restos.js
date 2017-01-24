@@ -9,7 +9,7 @@
 import Router from "express";
 import listRestosController from "../controllers/restos/list";
 import detailsRestosController from "../controllers/restos/details";
-// import createRestosController from "../controllers/restos/create";
+import createRestosController from "../controllers/restos/create";
 // import updateRestosController from "../controllers/restos/update";
 // import destroyRestosController from "../controllers/restos/destroy";
 
@@ -17,7 +17,7 @@ let oRouter = new Router();
 
 oRouter.get( "/restos", listRestosController );
 oRouter.get( "/restos/:id", detailsRestosController );
-// oRouter.post( "/restos", createRestosController );
+oRouter.post( "/restos", createRestosController );
 // oRouter.patch( "/restos", updateRestosController );
 // oRouter.delete( "/restos", destroyRestosController );
 
