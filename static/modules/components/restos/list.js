@@ -11,17 +11,17 @@
 
  import getLocation from "../../utils/location-manager.js";
 
- let oRestosList = Vue.component( "terminals-list", {
+ let oRestosList = Vue.component( "restos-list", {
      "data": function() {
          return {
-             "loaded": true,
+             "loaded": false,
              "restos": [],
              "error": null,
          };
      },
      "template": `
          <div class="restos-list">
-             <div class="loading" if="!loaded">
+             <div class="loading" v-if="!loaded">
                  <p>Loading…</p>
              </div>
              <div class="error" v-if="loaded && error">

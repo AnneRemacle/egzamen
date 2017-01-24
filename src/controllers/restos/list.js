@@ -57,6 +57,7 @@ export default function( oRequest, oResponse ) {
                  iCurrentHour = new Date().getHours() + ( new Date().getMinutes() / 60 );
 
              aCleanRestos = aRestos.map( ( { _id, name, slug, latitude, longitude, address, hours } ) => {
+                 console.log(parseFloat(hours[0][0])%1 ? Math.floor(hours[0][0])+":30" : Math.floor(hours[0][0])+":00");
                  return {
                     "id": _id,
                     "state": (iCurrentHour >= hours[ iCurrentDay ][0] && iCurrentHour <= hours[ iCurrentDay ][1]),
