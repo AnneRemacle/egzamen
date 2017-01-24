@@ -8,6 +8,7 @@
 
  import Vue from "vue";
  import reqwest from "reqwest";
+
  import getLocation from "../../utils/location-manager.js";
 
  let oRestosList = Vue.component( "terminals-list", {
@@ -26,7 +27,7 @@
              <div class="error" v-if="loaded && error">
                  <p>
                      <strong>Error: </strong>
-                     {{ error.message }}
+                     {{ error }}
                  </p>
              </div>
              <ul v-if="loaded">
@@ -40,6 +41,9 @@
              </ul>
          </div>
      `,
+     mounted() {
+        this.updateRestos();
+     },
      "methods": {
          updateRestos() {
              return getLocation()
@@ -53,12 +57,16 @@
                         },
                     } );
                 } )
-                .then( () => {
+                .then( ( oResponse ) => {
+                    let oResto = oResponse.data;
+
                     this.loaded = true;
+                    this.restos = oResto;
                 } )
                 .catch( this.showError );
          },
          showError( { message } ) {
+             console.log(message);
              this.loaded = true;
              this.error = message;
          },

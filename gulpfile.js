@@ -95,7 +95,7 @@ gulp.task( "styles", function() {
 // La tâche lint: pour que le linter soit actif et nous signale nos erreurs dans le code
 gulp.task( "lint", function() {
     return gulp
-        .src( [ "src/**/*.js", "static/modules/**/*.js" ] )
+        .src( [ "src/**/*.js", "static/modules/**.js" ] )
         .pipe( gEslint() )
         .pipe( gEslint.format() );
 } );
