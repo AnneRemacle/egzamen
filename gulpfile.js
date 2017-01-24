@@ -9,8 +9,9 @@
  "use strict";
 
  var
+     sUser = process.env.USER,
      gulp = require( "gulp" ),
-     gSass = require( "gulp-sass" ),
+     gSass = sUser !== "vagrant" && require( "gulp-sass" ),
      gEslint = require( "gulp-eslint" ),
      gBabel = require( "gulp-babel" ),
      gUtil = require( "gulp-util" ),
@@ -23,6 +24,46 @@
      gUglify = require( "gulp-uglify" ),
      ObjectID = Mongo.ObjectID,
      MongoClient = Mongo.MongoClient;
+
+ if ( sUser === "vagrant" ) {
+     gulp.task( "reset-db", function( fNext ){
+          // 1. Check if INSIDE vagrant
+         if ( process.env.USER !== "vagrant" ) {
+             gUtil.beep();
+             gUtil.log( gUtil.colors.red( "This task must be runned from INSIDE the vagrant box!" ) );
+             return fNext();
+         }
+         // Connect to the MongoDB
+         MongoClient.connect( "mongodb://127.0.0.1:27017/egzamen", function( oError, oDB ){
+
+             if ( oError ) {
+                 gUtil.beep();
+                 return fNext( oError );
+             }
+
+          // 2. drop database
+         oDB.dropDatabase()
+           .then( function(){
+               // 3. parse & fill export.json
+               var aRestos = require( __dirname + "/data/export.json" );
+
+               return oDB.collection( "restos" ).insertMany( aRestos );
+           } )
+           .then( function(){
+               oDB.close();
+               gUtil.log( gUtil.colors.green( "Database has been reset Mouahaha!" ) );
+               fNext();
+           } )
+           .catch( function( oError ){
+              //If error => desconnect the DB
+              oDB.close();
+              fNext( oError );
+           } )
+       } );
+     } );
+
+     return;
+ }
 
 // La tâche modules: Pour nous permettre de modulariser notre code
 gulp.task( "modules", function() {
@@ -72,42 +113,6 @@ gulp.task( "views", function() {
     return gulp
         .src( "src/views/**" )
         .pipe( gulp.dest( "bin/views" ) );
-} );
-
-gulp.task( "reset-db", function( fNext ){
-     // 1. Check if INSIDE vagrant
-    if ( process.env.USER !== "vagrant" ) {
-        gUtil.beep();
-        gUtil.log( gUtil.colors.red( "This task must be runned from INSIDE the vagrant box!" ) );
-        return fNext();
-    }
-    // Connect to the MongoDB
-    MongoClient.connect( "mongodb://127.0.0.1:27017/egzamen", function( oError, oDB ){
-
-        if ( oError ) {
-            gUtil.beep();
-            return fNext( oError );
-        }
-
-     // 2. drop database
-    oDB.dropDatabase()
-      .then( function(){
-          // 3. parse & fill export.json
-          var aRestos = require( __dirname + "/data/export.json" );
-
-          return oDB.collection( "restos" ).insertMany( aRestos );
-      } )
-      .then( function(){
-          oDB.close();
-          gUtil.log( gUtil.colors.green( "Database has been reset Mouahaha!" ) );
-          fNext();
-      } )
-      .catch( function( oError ){
-         //If error => desconnect the DB
-         oDB.close();
-         fNext( oError );
-      } )
-  } );
 } );
 
 // La tâche watch: pour que gulp "regarde" les fichiers listés dedans et suive les modifications
