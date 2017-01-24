@@ -10,7 +10,7 @@ let fSend,
     fError;
 
 fSend = function( oRequest, oResponse, oData = {}, iStatus = 200 ) {
-    oResponse.statut( iStatut ).json( {
+    oResponse.status( iStatus ).json( {
         "url": `[${ oRequest.method }] ${ oRequest.url }`,
         "timestamp": Date.now(),
         "data": oData,
