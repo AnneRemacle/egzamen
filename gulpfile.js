@@ -15,9 +15,24 @@
      gBabel = require( "gulp-babel" ),
      gUtil = require( "gulp-util" ),
      Mongo = require( "mongodb" ),
+     browserify = require( "browserify" ),
+     babelify = require( "babelify" ),
+     sourceStream = require( "vinyl-source-stream" ),
      ObjectID = Mongo.ObjectID,
      MongoClient = Mongo.MongoClient;
 
+// La tâche modules: Pour nous permettre de modulariser notre code
+gulp.task( "modules", function() {
+    browserify( "static/modules/main.js" )
+        .transform( babelify, {
+            "presets": [ "es2015" ]
+        } )
+        .bundle()
+        .pipe( sourceStream( "app.js" ) )
+        .pipe( gulp.dest( "static/js" ) );
+} );
+
+// La tâche styles: pour compiler nos fichiers sass en css et que notre site soit beauuuuw
 gulp.task( "styles", function() {
     return gulp
         .src( "static/sass/**/*.scss" )
@@ -93,10 +108,11 @@ gulp.task( "watch", function() {
     gulp.watch( "src/**/*.js", [ "build" ] );
     gulp.watch( "src/views/**", [ "views" ] );
     gulp.watch( "static/sass/**/*.scss", [ "styles" ] );
+    gulp.watch( "static/modules/**/*.js", [ "modules" ] );
 } );
 
 // La tâche défault, on lui donne toutes les tâches qu'on veut qui soient effectuées quand on tape juste "gulp"
-gulp.task( "default", [ "build", "views", "styles" ] );
+gulp.task( "default", [ "build", "views", "styles", "modules" ] );
 
 // La tâche work, on y liste les tâches qui doivent être réalisées quand on tape "gulp work"
 gulp.task( "work", [ "default", "watch" ] );
