@@ -38,6 +38,9 @@
              <router-link to="/">&lsaquo; retour</router-link>
          </div>
      `,
+     mounted() {
+        this.fetchInfos( this.$route.params.id );
+     },
      "methods": {
          fetchInfos( sRestoID ) {
              return getLocation()
@@ -51,7 +54,7 @@
                         },
                     } );
                 } )
-                then( ( oResponse ) => {
+                .then( ( oResponse ) => {
                     let oResto = oResponse.data;
 
                     this.loaded = true;

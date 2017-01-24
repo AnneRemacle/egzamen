@@ -52,13 +52,18 @@ export default function( oRequest, oResponse ) {
         })
         .toArray()
         .then( ( aRestos = [] ) => {
-             let aCleanRestos;
+             let aCleanRestos,
+                 iCurrentDay = new Date().getDay(),
+                 iCurrentHour = new Date().getHours() + ( new Date().getMinutes() / 60 );
 
-             aCleanRestos = aRestos.map( ( { _id, name, slug, latitude, longitude, address, hours } ) => ( {
-                 "id": _id,
-                 "distance": distance( oCurrentPosition, { latitude, longitude } ) * 1000,
-                 name, latitude, longitude, address, hours
-             } ) );
+             aCleanRestos = aRestos.map( ( { _id, name, slug, latitude, longitude, address, hours } ) => {
+                 return {
+                    "id": _id,
+                    "state": (iCurrentHour >= hours[ iCurrentDay ][0] && iCurrentHour <= hours[ iCurrentDay ][1]),
+                    "distance": distance( oCurrentPosition, { latitude, longitude } ) * 1000,
+                    name, latitude, longitude, address, hours
+                 }
+             } );
 
             // On trie les restos selon la distance à laquelle ils se trouvent
              aCleanRestos.sort( ( oRestoOne, oRestoTwo ) => oRestoOne.distance - oRestoTwo.distance );

@@ -35,6 +35,8 @@
                      <router-link :to="'/'+ elt.id">
                          <strong>{{ restos.name }}</strong>
                          <address>{{ elt.address }}</address>
+                         <span v-if="!elt.state">fermé</span>
+                         <span v-if="elt.state">ouvert</span>
                          <span class="distance">{{ elt.distance }}m</span>
                      </router-link>
                  </li>
