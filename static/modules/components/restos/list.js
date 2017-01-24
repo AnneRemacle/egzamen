@@ -32,7 +32,7 @@
              </div>
              <ul v-if="loaded">
                  <li v-for="elt in restos">
-                     <router-link:to"'/'+ elt.id">
+                     <router-link :to="'/'+ elt.id">
                          <strong>{{ restos.name }}</strong>
                          <address>{{ elt.address }}</address>
                          <span class="distance">{{ elt.distance }}m</span>
