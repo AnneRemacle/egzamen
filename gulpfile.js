@@ -10,12 +10,24 @@
 
  var
      gulp = require( "gulp" ),
+     gSass = require( "gulp-sass" ),
      gEslint = require( "gulp-eslint" ),
      gBabel = require( "gulp-babel" ),
      gUtil = require( "gulp-util" ),
      Mongo = require( "mongodb" ),
      ObjectID = Mongo.ObjectID,
      MongoClient = Mongo.MongoClient;
+
+gulp.task( "styles", function() {
+    return gulp
+        .src( "static/sass/**/*.scss" )
+        .pipe( gSass( {
+            "includePaths": [
+                require( "bourbon" ).includePaths,
+            ],
+        } ).on( "error", gSass.logError ) )
+        .pipe( gulp.dest( "static/css" ) )
+} );
 
 // La tâche lint: pour que le linter soit actif et nous signale nos erreurs dans le code
 gulp.task( "lint", function() {
@@ -80,10 +92,11 @@ gulp.task( "reset-db", function( fNext ){
 gulp.task( "watch", function() {
     gulp.watch( "src/**/*.js", [ "build" ] );
     gulp.watch( "src/views/**", [ "views" ] );
+    gulp.watch( "static/sass/**/*.scss", [ "styles" ] );
 } );
 
 // La tâche défault, on lui donne toutes les tâches qu'on veut qui soient effectuées quand on tape juste "gulp"
-gulp.task( "default", [ "build", "views" ] );
+gulp.task( "default", [ "build", "views", "styles" ] );
 
 // La tâche work, on y liste les tâches qui doivent être réalisées quand on tape "gulp work"
-gulp.task( "work", [ "build", "views", "watch" ] );
+gulp.task( "work", [ "default", "watch" ] );
