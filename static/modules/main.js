@@ -27,7 +27,9 @@ let oApp = new Vue( {
             <header>
                 <h1>Egzamen</h1>
             </header>
-            <router-view></router-view>
+            <main>
+                <router-view></router-view>
+            </main>
             <footer>
                 <small>Codé par Anne</small>
             </footer>
