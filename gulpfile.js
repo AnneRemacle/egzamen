@@ -25,12 +25,19 @@ gulp.task( "lint", function() {
         .pipe( gEslint.format() );
 } );
 
-// La tâche build: parce qu'on est trop de bêêêtes en anglais, on sait que build ça veut dire construire. Du coup, cette tâche va être utilisée pour prendre les fichiers javascript du dossier src et les transpiler de ES2015 à ES5 dans le dossier bin/views
+// La tâche build: parce qu'on est trop de bêêêtes en anglais, on sait que build ça veut dire construire. Du coup, cette tâche va être utilisée pour prendre les fichiers javascript du dossier src et les transpiler de ES2015 à ES5 dans le dossier bin
 gulp.task( "build", function() {
     return gulp
         .src( "src/**/*.js" )
         .pipe( gBabel() )
         .pipe( gulp.dest( "bin" ) );
+} );
+
+// La tâche views: elle va servir à "envoyer" les fichiers views dans le dossier views de la vagrant
+gulp.task( "views", function() {
+    return gulp
+        .src( "src/views/**" )
+        .pipe( gulp.dest( "bin/views" ) );
 } );
 
 gulp.task( "reset-db", function( fNext ){
@@ -72,10 +79,11 @@ gulp.task( "reset-db", function( fNext ){
 // La tâche watch: pour que gulp "regarde" les fichiers listés dedans et suive les modifications
 gulp.task( "watch", function() {
     gulp.watch( "src/**/*.js", [ "build" ] );
+    gulp.watch( "src/views/**", [ "views" ] );
 } );
 
 // La tâche défault, on lui donne toutes les tâches qu'on veut qui soient effectuées quand on tape juste "gulp"
-gulp.task( "default", [ "build" ] );
+gulp.task( "default", [ "build", "views" ] );
 
 // La tâche work, on y liste les tâches qui doivent être réalisées quand on tape "gulp work"
-gulp.task( "work", [ "build", "watch" ] );
+gulp.task( "work", [ "build", "views", "watch" ] );
