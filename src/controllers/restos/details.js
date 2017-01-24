@@ -28,12 +28,13 @@
             "_id": new ObjectID( sRestoID ),
             "deleted_at": null,
         } )
-        .then( ( { _id, name, latitude, longitude, address, hours } ) => {
-            let oCleanResto;
-
-            if ( !_id ) {
+        .then( ( oResto ) => {
+            if ( !oResto ) {
                 return error( oRequest, oResponse, "Unknown Restaurant", 404 );
             }
+
+            let { _id, name, latitude, longitude, address, hours } = oResto,
+                oCleanResto;
 
             oCleanResto = {
                 "id" : _id,
