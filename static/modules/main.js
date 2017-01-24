@@ -6,8 +6,11 @@
  * started at 24/01/2017
  */
 
- import utils from "./utils";
+import Vue from "vue";
 
- console.log( "Hey you!" );
-
- utils();
+let oApp = new Vue( {
+    "el": "#app",
+    "data": {
+        "message": "Coucou les gens!",
+    },
+} );
