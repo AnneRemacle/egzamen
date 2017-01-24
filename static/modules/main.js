@@ -31,7 +31,7 @@ let oApp = new Vue( {
                 <router-view></router-view>
             </main>
             <footer>
-                <small>Codé par Anne</small>
+                <small>Codé par Anne <a href="https://www.github.com/AnneRemacle/egzamen">Voir le code</a></small>
             </footer>
         </div>
     `,
