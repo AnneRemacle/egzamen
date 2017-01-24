@@ -7,27 +7,33 @@
  */
 
 import Vue from "vue";
+import VueRouter from "vue-router";
 
-import "./components/cats-list";
-import "./components/secret";
+Vue.use( VueRouter );
 
+import RestosList from "./components/restos-list";
+import RestoDetails from "./components/resto-details";
+
+let oRouter = new VueRouter( {
+    "routes": [
+        { "path": "/", "component": RestosList },
+        { "path": "/:id", "component": RestoDetails },
+    ],
+} );
 
 let oApp = new Vue( {
     "template": `
-    <div class="box">
-            <p>{{ message }}</p>
-            <cats-list v-bind:elements="cats"></cats-list>
-            <secret v-bind:content="secret"></secret>
+        <div class="wrapper">
+            <header>
+                <h1>Egzamen</h1>
+            </header>
+            <router-view></router-view>
+            <footer>
+                <small>Codé par Anne</small>
+            </footer>
         </div>
     `,
-    "data": {
-        "message": "Coucou les gens!",
-        "secret": "I don't like dogs",
-        "cats": [
-            { "name":"Argus", "age": "4" },
-            { "name": "Mickey", "age": "8" }
-        ],
-    },
+    "router": oRouter,
 } );
 
 oApp.$mount( "#app" );
