@@ -11,8 +11,8 @@ import VueRouter from "vue-router";
 
 Vue.use( VueRouter );
 
-import RestosList from "./components/restos-list";
-import RestoDetails from "./components/resto-details";
+import RestosList from "./components/restos/list";
+import RestoDetails from "./components/restos/details";
 
 let oRouter = new VueRouter( {
     "routes": [

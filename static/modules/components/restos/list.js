@@ -1,6 +1,6 @@
 /* RIA/egzamen
  *
- * /static/modules/components/restos-list.js - Restos list Vue component
+ * /static/modules/components/restos/list - Restos list Vue component
  *
  * coded by Anne
  * started at 24/01/2017
@@ -8,8 +8,7 @@
 
  import Vue from "vue";
  import reqwest from "reqwest";
-
- const GEOLOCATION_OPTIONS = { "enableHighAccuracy": true };
+ import getLocation from "../../utils/location-manager.js";
 
  let oRestosList = Vue.component( "terminals-list", {
      "data": function() {
@@ -43,31 +42,28 @@
      `,
      "methods": {
          updateRestos() {
-             navigator.geolocation.getCurrentPosition( this.geoSuccess, this.showError, GEOLOCATION_OPTIONS );
+             return getLocation()
+                .then( ( { coords } ) => {
+                    return reqwest( {
+                        "url": "/restos",
+                        "method": "get",
+                        "data": {
+                            "latitude": coords.latitude,
+                            "longitude": coords.longitude,
+                        },
+                    } );
+                } )
+                .then( () => {
+                    this.loaded = true;
+                } )
+                .catch( this.showError );
          },
-         geoSuccess( { coords } ) {
-             console.log( "posisiton:", coords );
-             reqwest( {
-                 "url": "/restos",
-                 "method": "get",
-                 "data": {
-                     "latitude": coords.latitude,
-                     "longitude": coords.longitude,
-                 },
-                 "success": this.ajaxSuccess,
-                 "error": this.showError,
-             } );
-         },
-         ajaxSuccess( oResponse ) {
-             console.log( "response:", oResponse );
-             thid.loaded = true;
-             this.restos = oResponse.data;
-         },
-         showError( oError ) {
+         showError( { message } ) {
              this.loaded = true;
-             this.error = oError;
+             this.error = message;
          },
+
      },
  } );
 
-export default oRestosList;
+ export default oRestosList;
