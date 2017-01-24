@@ -37,7 +37,7 @@ gulp.task( "reset-db", function( fNext ){
      // 1. Check if INSIDE vagrant
     if ( process.env.USER !== "vagrant" ) {
         gUtil.beep();
-        gUtil.log( gUtil.color.pink( "This task must be runned from INSIDE the vagrant box!" ) );
+        gUtil.log( gUtil.colors.red( "This task must be runned from INSIDE the vagrant box!" ) );
         return fNext();
     }
     // Connect to the MongoDB
@@ -47,8 +47,6 @@ gulp.task( "reset-db", function( fNext ){
             gUtil.beep();
             return fNext( oError );
         }
-
-    } );
 
      // 2. drop database
     oDB.dropDatabase()
@@ -68,6 +66,7 @@ gulp.task( "reset-db", function( fNext ){
          oDB.close();
          fNext( oError );
       } )
+  } );
 } );
 
 // La tâche watch: pour que gulp "regarde" les fichiers listés dedans et suive les modifications
