@@ -22,25 +22,33 @@
      "template": `
          <div class="restos-list">
              <div class="loading" v-if="!loaded">
-                 <p>Loading…</p>
+                 <p>Chargement…</p>
              </div>
              <div class="error" v-if="loaded && error">
                  <p>
-                     <strong>Error: </strong>
+                     <strong>Erreur: </strong>
                      {{ error }}
                  </p>
              </div>
-             <ul v-if="loaded">
-                 <li v-for="elt in restos">
-                     <router-link :to="'/'+ elt.id">
-                         <strong>{{ restos.name }}</strong>
-                         <address>{{ elt.address }}</address>
-                         <span v-if="!elt.state">fermé</span>
-                         <span v-if="elt.state">ouvert</span>
-                         <span class="distance">{{ elt.distance }}m</span>
-                     </router-link>
-                 </li>
-             </ul>
+             <div v-if=loaded class="content">
+                <h2 class="content__title">Les Quicks proches de vous</h2>
+                 <ul class="list">
+                     <li v-for="elt in restos" class="list__item item">
+                         <router-link :to="'/'+ elt.id">
+                             <strong class="item__name">{{ elt.name }}</strong>
+                             <address class="item__address">{{ elt.address }}</address>
+                             <p class="item__statut">
+                                Ce Quick est actuellement&nbsp:
+                                 <span v-if="!elt.state" class="item__statut--open">fermé</span>
+                                 <span v-if="elt.state" class="item__statut--close">ouvert</span>
+                             </p>
+                             <span class="item__distance">Il se trouve à {{ elt.distance }}m de vous</span>
+                         </router-link>
+                     </li>
+                 </ul>
+            </div>
+            <div class="map" id="gmap">
+            </div>
          </div>
      `,
      mounted() {

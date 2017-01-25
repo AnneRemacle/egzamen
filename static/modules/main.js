@@ -24,14 +24,24 @@ let oRouter = new VueRouter( {
 let oApp = new Vue( {
     "template": `
         <div class="wrapper">
-            <header>
-                <h1>Egzamen</h1>
+            <header class="header">
+                <h1 class="header__title">
+                    Egzamen
+                    <span class="header__title--small">
+                        Une app pour trouver des Quick
+                    </span>
+                </h1>
             </header>
             <main>
                 <router-view></router-view>
             </main>
-            <footer>
-                <small>Codé par Anne <a href="https://www.github.com/AnneRemacle/egzamen">Voir le code</a></small>
+            <footer class="footer">
+                <small class="footer__text">
+                    Codé par Anne
+                    <a class="footer__link" href="https://www.github.com/AnneRemacle/egzamen">
+                        Voir le repo Github <i class="fa fa-github footer__link--github"></i>
+                    </a>
+                </small>
             </footer>
         </div>
     `,
