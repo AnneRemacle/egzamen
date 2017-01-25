@@ -34,10 +34,13 @@
             }
 
             let { _id, name, latitude, longitude, address, hours } = oResto,
-                oCleanResto;
+                oCleanResto,
+                iCurrentDay = new Date().getDay(),
+                iCurrentHour = new Date().getHours() + ( new Date().getMinutes() / 60 );
 
             oCleanResto = {
                 "id" : _id,
+                "state": (iCurrentHour >= hours[ iCurrentDay ][0] && iCurrentHour <= hours[ iCurrentDay ][1]),
                 name, latitude, longitude, address, hours,
             };
 
