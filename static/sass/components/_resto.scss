@@ -1,0 +1,50 @@
+/* RIA/egzamen
+ *
+ * /static/sass/components/_resto.scss - Styles for resto details
+ *
+ * coded by Anne
+ * started at 24/01/2017
+ */
+
+ .resto {
+     &__infos {
+         margin-bottom: 1em;
+        &--strong {
+            font-weight: bold;
+        }
+     }
+ }
+
+ .hours {
+     width: 100%;
+     margin-bottom: 2em;
+     &__title {
+         font-weight: lighter;
+         font-size: 1.3em;
+         margin: 1.5em 0 0em;
+     }
+ }
+
+ table {
+    display: table;
+ }
+
+ tr {
+    display: table-row;
+    width: 100%;
+ }
+
+ th, td {
+    display: table-cell;
+    padding: .8em 0;
+ }
+
+ th {
+     text-align: left;
+     padding-right: 2em;
+     font-weight: bold;
+ }
+
+ td:nth-child(2) {
+     text-align: right;
+ }

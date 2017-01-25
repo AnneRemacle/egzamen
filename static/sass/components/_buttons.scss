@@ -1,0 +1,89 @@
+/* RIA/egzamen
+ *
+ * /static/sass/components/_buttons.scss - Styles for buttons
+ *
+ * coded by Anne
+ * started at 24/01/2017
+ */
+
+ @-webkit-keyframes bouncing2 {
+   0%, 100% {
+     transform: translateX(0);
+ }
+ 	56% {
+     transform: translateX(-10px);
+   }
+ }
+ @-moz-keyframes bouncing2 {
+   0%, 100% {
+     transform: translateX(0);
+ }
+ 	56% {
+     transform: translateX(-10px);
+   }
+ }
+ @keyframes bouncing2 {
+   0%, 100% {
+     transform: translateX(0);
+ }
+ 	56% {
+     transform: translateX(-10px);
+   }
+ }
+
+
+ @-webkit-keyframes bouncing {
+   0%, 100% {
+     transform: translateX(0);
+ }
+    56% {
+     transform: translateX(10px);
+   }
+ }
+ @-moz-keyframes bouncing {
+   0%, 100% {
+     transform: translateX(0);
+ }
+    56% {
+     transform: translateX(10px);
+   }
+ }
+ @keyframes bouncing {
+   0%, 100% {
+     transform: translateX(0);
+ }
+    56% {
+     transform: translateX(10px);
+   }
+ }
+
+ .button {
+     background: $buttons;
+     color: white;
+     padding: .5em 1em;
+     text-decoration: none;
+     border-radius: 3px;
+     display: inline-block;
+     text-align: center;
+ }
+
+.button:hover .button__left{
+       -webkit-animation: bouncing2 .6s ease-in infinite; /* Safari 4+ */
+       -moz-animation: bouncing2 .6s ease-in infinite; /* Fx 5+ */
+       animation: bouncing2 .6s ease-in infinite; /* IE 10+, Fx 29+ */
+
+ }
+
+ .button:hover .button__right{
+        -webkit-animation: bouncing .6s ease-in infinite; /* Safari 4+ */
+        -moz-animation: bouncing .6s ease-in infinite; /* Fx 5+ */
+        animation: bouncing .6s ease-in infinite; /* IE 10+, Fx 29+ */
+
+ }
+
+.btn-right {
+    margin: .6em 0 1em 20%;
+}
+.btn-left {
+    margin-left: 60%;
+}

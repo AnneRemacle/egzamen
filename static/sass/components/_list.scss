@@ -29,12 +29,15 @@
      &__item > a {
         text-decoration: none;
         color: $textColor;
+        display: inline-block;
+        width: 80%;
      }
  }
 
  .item {
      &__link {
          display: inline-block;
+         width: 100%;
          vertical-align: top;
      }
      &__name {
@@ -59,6 +62,7 @@
         vertical-align: top;
         margin-right: 3%;
         margin-top: .3em;
+        width: 15%;
      }
      &__more {
          margin-top: .5em;
