@@ -39,7 +39,7 @@ let oApp = new Vue( {
                 <small class="footer__text">
                     Codé par Anne
                     <a class="footer__link" href="https://www.github.com/AnneRemacle/egzamen">
-                        Voir le repo Github <i class="fa fa-github footer__link--github"></i>
+                        Voir le repo Github <i class="fa fa-github fa-2x footer__link--github"></i>
                     </a>
                 </small>
             </footer>
