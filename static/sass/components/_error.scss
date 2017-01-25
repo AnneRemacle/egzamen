@@ -1,0 +1,19 @@
+/* RIA/egzamen
+ *
+ * /static/sass/components/_error.scss - Styles for error section
+ *
+ * coded by Anne
+ * started at 24/01/2017
+ */
+
+.error {
+    text-align: center;
+
+    &__text {
+
+    }
+    &__strong {
+        color: $closed;
+        font-weight: bold;
+    }
+}
