@@ -1,0 +1,23 @@
+/* RIA/egzamen
+ *
+ * /static/sass/components/_header.scss - Styles for header
+ *
+ * coded by Anne
+ * started at 24/01/2017
+ */
+
+ .header {
+     &__title {
+         font-size: 2em;
+         width: 60%;
+         margin: 1em auto 2em;
+         display: block;
+         text-align: center;
+        &--small {
+            display: block;
+            font-size: .8em;
+            margin: .5em 0;
+        }
+     }
+
+ }

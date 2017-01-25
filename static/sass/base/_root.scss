@@ -1,0 +1,21 @@
+/* RIA/egzamen
+ *
+ * static/sass/base/_root.scss - basic styles
+ *
+ * coded by Anne
+ * started at 24/01/2017
+ */
+
+html {
+    font-family: $helvetica;
+    background: $bg;
+    color: $textColor;
+
+}
+body {
+    line-height: 1.5;
+}
+
+main {
+    margin-bottom: 3em;
+}

@@ -8,6 +8,16 @@
 
 @import "bourbon";
 
-body {
+@import "settings/colors";
+@import "settings/fonts";
 
-}
+@import "tools/utils";
+
+@import "generic/box-sizing";
+@import "generic/meyer-reset";
+
+@import "base/root";
+
+@import "components/header";
+@import "components/list";
+@import "components/footer";

@@ -1,0 +1,61 @@
+/* RIA/egzamen
+ *
+ * /static/sass/components/_list.scss - Styles for list page
+ *
+ * coded by Anne
+ * started at 24/01/2017
+ */
+
+.wrapper {
+    margin-left: 10%;
+}
+ .content {
+     width: 30%;
+     display: inline-block;
+    margin-bottom: 3em;
+     &__title {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+     }
+ }
+
+ .list {
+
+     &__item {
+        margin-bottom: 1em;
+     }
+     &__item > a {
+        text-decoration: none;
+        color: $textColor;
+     }
+ }
+
+ .item {
+     &__link {
+         display: inline-block;
+         vertical-align: top;
+     }
+     &__name {
+        font-weight: lighter;
+        font-size: 1.5em;
+        margin-bottom: 1em;
+     }
+     &__address {
+
+     }
+     &__statut {
+         &--open {
+             color: $open;
+
+         }
+         &--close {
+            color: $closed;
+         }
+     }
+     &__distance {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 3%;
+        margin-top: .3em;
+     }
+ }
