@@ -32,18 +32,18 @@
              </div>
              <div v-if=loaded class="content">
                 <h2 class="content__title">Les Quicks proches de vous</h2>
-                 <ul class="list">
+                 <ul class="list clearfix">
                      <li v-for="elt in restos" class="list__item item">
-                         <router-link :to="'/'+ elt.id">
+                        <span class="item__distance">{{ elt.distance }}m</span>
+                         <router-link :to="'/'+ elt.id" class="item__link">
                              <strong class="item__name">{{ elt.name }}</strong>
                              <address class="item__address">{{ elt.address }}</address>
                              <p class="item__statut">
                                 Ce Quick est actuellement&nbsp:
-                                 <span v-if="!elt.state" class="item__statut--open">fermé</span>
-                                 <span v-if="elt.state" class="item__statut--close">ouvert</span>
+                                 <span v-if="!elt.state" class="item__statut--close">fermé</span>
+                                 <span v-if="elt.state" class="item__statut--open">ouvert</span>
                              </p>
-                             <span class="item__distance">Il se trouve à {{ elt.distance }}m de vous</span>
-                         </router-link>
+                         </router-link>     
                      </li>
                  </ul>
             </div>
