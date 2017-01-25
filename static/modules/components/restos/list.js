@@ -44,12 +44,14 @@
                                  <span v-if="!elt.state" class="item__statut--close">fermé</span>
                                  <span v-if="elt.state" class="item__statut--open">ouvert</span>
                              </p>
+                             <p class="item__more">Voir les infos <i class="fa fa-arrow-right"></i></p>
                          </router-link>
                      </li>
                  </ul>
+
             </div>
-            <div class="map" id="gmap">
-            </div>
+            <div class="map" id="gmap"></div>
+
          </div>
      `,
      mounted() {
