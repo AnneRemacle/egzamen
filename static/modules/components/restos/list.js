@@ -9,23 +9,14 @@
  import Vue from "vue";
  import reqwest from "reqwest";
 
-import {load, Map, Marker} from 'vue-google-maps';
-
 import getLocation from "../../utils/location-manager.js";
-
-load( 'AIzaSyClfGzs3JWygOHF-J3GQqJke__tElojigQ' );
 
  let oRestosList = Vue.component( "restos-list", {
      "data": function() {
          return {
              "loaded": false,
              "restos": [],
-             "error": null,
-             "center": {
-                 "lat": 60,
-                 "lng": 5
-             },
-             "markers": []
+             "error": null
          };
      },
      "template": `
@@ -57,13 +48,6 @@ load( 'AIzaSyClfGzs3JWygOHF-J3GQqJke__tElojigQ' );
                          </router-link>
                      </li>
                  </ul>
-
-                 <map id="gmap" class="map"
-                    :center.sync="center"
-                    :zoom="7"
-                  >
-                  </map>
-
             </div>
 
          </div>
