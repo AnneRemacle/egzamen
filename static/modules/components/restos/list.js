@@ -22,11 +22,12 @@
      "template": `
          <div class="restos-list">
              <div class="loading" v-if="!loaded">
-                 <p>Chargement…</p>
+                 <i class="fa fa-spinner fa-spin fa-3x fa-fw loading__icon"></i>
+                 <p class="loading__text">Un instant, recherche en cours</p>
              </div>
              <div class="error" v-if="loaded && error">
-                 <p>
-                     <strong>Erreur: </strong>
+                 <p class="error__text">
+                     <strong class="error__strong">Erreur: </strong>
                      {{ error }}
                  </p>
              </div>
@@ -43,7 +44,7 @@
                                  <span v-if="!elt.state" class="item__statut--close">fermé</span>
                                  <span v-if="elt.state" class="item__statut--open">ouvert</span>
                              </p>
-                         </router-link>     
+                         </router-link>
                      </li>
                  </ul>
             </div>
